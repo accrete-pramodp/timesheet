@@ -9,7 +9,7 @@ $client = new MongoDB\Client;
 $timesheetdb = $client->timesheet;
 $tsdatacollection = $timesheetdb->tsdata;
 
-$documentlists = $tsdatacollection->find(["username"=> $_SESSION['name']]);
+$documentlists = $tsdatacollection->find();
 
 $clients = array();
 $projects = array();
@@ -31,6 +31,7 @@ $entry_type_names = array_unique($entry_type);
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<script src="jquery.js"></script>
 	<title>GNS - Welcome to Portal</title>
 </head>
 <body>
@@ -74,9 +75,16 @@ $entry_type_names = array_unique($entry_type);
 					<?php } ?>
 				</select>
 			</span>
+			
+			<span><input type="button" name="Search" value="SEARCH" onclick="search_submit();"></span>
 		</div>
 	</div>
 	
 
 </body>
 </html>
+<script>
+function search_submit() {
+	alert($( "#clients_list option:selected" ).val());
+}
+</script>
