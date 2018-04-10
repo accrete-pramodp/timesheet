@@ -11,18 +11,20 @@ $tsdeptcollection = $timesheetdb->tsdept;
 
 //$deptlists = $tsdeptcollection->find();
 $page  = $_POST['page'];
-$limit = 5;
+$limit = 7;
 $skip  = ($page - 1) * $limit;
 $next  = ($page + 1);
 $prev  = ($page - 1);
 $sort  = array('dname' => -1);
 
-$deptlists = $tsdeptcollection->find([],['skip'=>$skip,'limit'=> $limit]);
+
 ?>
 
 
 <?php
+
 if(isset($_POST['show'])){
+	$deptlists = $tsdeptcollection->find([],['skip'=>$skip,'limit'=> $limit]);
 ?>
 <table class = "table table-bordered alert-warning table-hover">
 	<thead>
@@ -47,13 +49,13 @@ if(isset($_POST['show'])){
 <?php 
 		$total=  $tsdeptcollection->count();
 		if($page > 1){
-			echo '<a href="?page=' . $prev . '">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+			echo '<a href="?page=' . $prev . '">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;'. $page . ' of '. $total;
 			if($page * $limit < $total) {
-				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+				echo '&nbsp;&nbsp;&nbsp;&nbsp; <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
 			}
 		} else {
 			if($page * $limit < $total) {
-				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;'. $page . ' of '. $total;
 			}
 		}
 ?>
@@ -61,6 +63,7 @@ if(isset($_POST['show'])){
 <?php 
 
    	} else if(isset($_POST['listshow'])) { 
+   		$deptlists = $tsdeptcollection->find();
    		foreach($deptlists as $deptlist){
 ?>
    			<option value="<?php echo ucfirst(strtolower($deptlist['dname'])); ?>"><?php echo ucfirst(strtolower($deptlist['dname'])); ?></option>   			

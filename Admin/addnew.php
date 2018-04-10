@@ -14,7 +14,7 @@ switch($_POST['collectionName']) {
 		
 			foreach($deptLists as $deptList) {
 				if(count($deptList) > 0 ) {
-					echo "This department is already registered<br><a href='index.php'>Back</a>"; exit;
+					echo "error"; exit;
 				}
 			}
 			

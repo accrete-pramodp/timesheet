@@ -44,13 +44,13 @@ if(isset($_POST['show'])){
 </table>
 <?php $total=  $tscollection->count();
 		if($page > 1){
-			echo '<a href="?page=' . $prev . '">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+			echo '<a href="?page=' . $prev . '">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;'. $page . ' of '. $total;
 			if($page * $limit < $total) {
-				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+				echo '&nbsp;&nbsp;&nbsp;&nbsp; <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
 			}
 		} else {
 			if($page * $limit < $total) {
-				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;'. $page . ' of '. $total;
 			}
 		} ?>
 <?php

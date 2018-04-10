@@ -52,8 +52,13 @@
     						collectionName: 'tsdept',
     						add: 1,
     					},
-    					success: function(){
-    						showDept();
+    					success: function(data){
+    						if(data == 'error') {
+								alert('Already registered!');
+            				} else {
+            					$('#dname').val('');
+    							showDept();
+            				}
     					}
     				});
     			}
@@ -92,8 +97,10 @@
     					success: function(response) {
         					if(response == 'success') {
         						$('#dnameactual').val($('#dname').val());
+        						$('#dname').val('')
         						showDept();
-        						alert('Department updated successfully');        						     						
+        						alert('Department updated successfully'); 
+        						       						     						
             				} else {
             					alert('Unable to update! Try again');
             				}
