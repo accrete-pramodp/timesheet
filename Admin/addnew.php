@@ -26,6 +26,21 @@ switch($_POST['collectionName']) {
 			printf("Inserted %d document<br><a href='index.php'>Back</a>", $insertOneResult->getInsertedCount());
 		break;
 		
+	case 'tsdeptedit':
+		$tscollection = $timesheetdb->tsdept;
+		$deptlists = $tscollection->find(['dname' => $_POST['dnameactual']]);
+		
+			
+		foreach($deptlists as $deptlist) {
+			if(count($deptlist) > 0 ) {
+					
+				$updateone = $tscollection->updateOne(['dname' => $_POST['dnameactual']],	['$set' => ['dname' => $_POST['dname']]]);
+				echo "success"; exit;
+			}
+		}
+		
+		break;
+		
 	case 'tsusers':
 		$tscollection = $timesheetdb->tsusers;
 		$userslists = $tscollection->find(['euname' => ucfirst($_POST['euname'])]);

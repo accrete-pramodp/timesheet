@@ -101,13 +101,15 @@
     				});
     			}
     		});
+    		
     		//Delete
     		$(document).on('click', '.delete', function(){
     			$euname=$(this).val();
     				$.ajax({
     					type: "POST",
-    					url: "delete_user.php",
+    					url: "delete.php",
     					data: {
+    						collectionName: 'tsusers',
     						euname: $euname,
     						del: 1,
     					},
@@ -119,6 +121,7 @@
     					}
     				});
     		});
+    		
     		//Update
     		$(document).on('click', '.edit', function(){
     			//$('#addnew').addClass('hide');
@@ -164,10 +167,11 @@
 
     	function getUserDetailsforedit($euname) {
     		$.ajax({
-    			url: 'find_user_for_edit.php',
+    			url: 'find_data_for_edit.php',
     			type: 'POST',
     			async: false,
     			data:{
+    				collectionName: 'tsusers',
     				euname: $euname,
     				show: 1
     			},

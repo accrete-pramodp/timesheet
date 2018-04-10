@@ -8,12 +8,17 @@
 					<center><h2 class = "text-primary">Department's List</h2></center>
 					<hr>
 					<div>
-						<form class = "form-inline">
+						<form class = "form-inline" id="department">
 							<table width="100%">
 								<tr>
 		    						<td width="20%"><label>Department Name:</label></td>
-		    						<td width="25%"><input type  = "text" id = "dname"></td>
-		    						<td><td><button type = "button" id="addnew" class = "btn btn-primary"><span class = "glyphicon glyphicon-plus"></span> Add</button></td></td>
+		    						<td width="25%"><input type="text" id="dname" value="">
+		    						<input type="hidden" id="dnameactual" value=""></td>
+		    						<td>
+		    							<button type = "button" id="addnew" class = "btn btn-primary"><span class = "glyphicon glyphicon-plus"></span> Add</button>
+		    							<button type = "button" id="editnew" class = "btn btn-primary hide"><span class = "glyphicon glyphicon-pencil"></span> Edit</button>
+		    							<button type = "button" id="cancel" class = "btn btn-primary">Cancel</button>
+		    						</td>
 	    						</tr>	    						  						
     						</table>						
     					</form>
@@ -53,6 +58,71 @@
     				});
     			}
     		});
+
+    		//Cancel
+    		$(document).on('click', '#cancel', function(){
+    			$('#department')[0].reset();
+    			$('#addnew').removeClass('hide');
+    			//$('#editnew').addClass('hide'); 
+    		});
+
+    		//Update
+    		$(document).on('click', '.edit', function(){
+    			$('#addnew').addClass('hide');
+    			$('#editnew').removeClass('hide');
+    			$('#dnameactual').val($(this).val());    			
+    			getDeptDetailsforedit($(this).val());
+
+    		});
+
+    		$(document).on('click', '#editnew', function() {
+    			if ($('#dname').val()=="") {
+    				alert('Please input department name');
+    			}
+    			else {
+    				$.ajax({
+    					type: "POST",
+    					url: "addnew.php",
+    					data: {    						
+    						dname: $('#dname').val(),  
+    						dnameactual: $('#dnameactual').val(),  						
+    						collectionName: 'tsdeptedit',
+    						edit: 1,
+    					},
+    					success: function(response) {
+        					if(response == 'success') {
+        						$('#dnameactual').val($('#dname').val());
+        						showDept();
+        						alert('Department updated successfully');        						     						
+            				} else {
+            					alert('Unable to update! Try again');
+            				}
+    					}
+    				});
+    			}     
+    		});
+
+
+    		//Delete
+    		$(document).on('click', '.delete', function(){
+    			$dname=$(this).val();
+    				$.ajax({
+    					type: "POST",
+    					url: "delete.php",
+    					data: {
+    						collectionName: 'tsdept',
+    						dname: $dname,
+    						del: 1,
+    					},
+    					success: function(data){
+    						if(data == 'success') {
+								alert('Records deleted successfully');
+            				}
+    						showDept();
+    					}
+    				});
+    		});
+    		
     	});
 
     	//Showing our Table
@@ -69,4 +139,23 @@
     			}
     		});
     	}
+
+    	function getDeptDetailsforedit($dname) {
+    		$.ajax({
+    			url: 'find_data_for_edit.php',
+    			type: 'POST',
+    			async: false,
+    			data:{
+    				collectionName: 'tsdept',
+    				dname: $dname,
+    				show: 1
+    			},
+    			success: function(response){
+    				var obj = jQuery.parseJSON( response );
+    				
+					$("#dname").val(obj.dname);
+    			}
+    		});
+    	}
+    	
     </script>

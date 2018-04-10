@@ -24,9 +24,13 @@ if(isset($_POST['show'])){
 	<?php foreach($deptlists as $deptlist){ ?>
 		<tr>
 			<td><?php echo $deptlist['dname']; ?></td>
-			<td><button class="btn btn-success" data-toggle="modal" data-target="#edit<?php echo $deptlist['dname']; ?>"><span class = "glyphicon glyphicon-pencil"></span> Edit</button> 
+			<td>
+				<button class="btn btn-success edit" value="<?php echo $deptlist['dname']; ?>">
+					<span class = "glyphicon glyphicon-pencil"></span> Edit
+				</button> 
 				<button class="btn btn-danger delete" value="<?php echo $deptlist['dname']; ?>">
-				<span class = "glyphicon glyphicon-trash"></span> Delete</button>
+					<span class = "glyphicon glyphicon-trash"></span> Delete
+				</button>
 			</td>
 		</tr>
 	<?php } ?>
