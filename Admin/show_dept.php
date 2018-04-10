@@ -9,7 +9,15 @@ $client = new MongoDB\Client;
 $timesheetdb = $client->timesheet;
 $tsdeptcollection = $timesheetdb->tsdept;
 
-$deptlists = $tsdeptcollection->find();
+//$deptlists = $tsdeptcollection->find();
+$page  = $_POST['page'];
+$limit = 5;
+$skip  = ($page - 1) * $limit;
+$next  = ($page + 1);
+$prev  = ($page - 1);
+$sort  = array('dname' => -1);
+
+$deptlists = $tsdeptcollection->find([],['skip'=>$skip,'limit'=> $limit]);
 ?>
 
 
@@ -36,7 +44,22 @@ if(isset($_POST['show'])){
 	<?php } ?>
 	</tbody>
 </table>
-<?php
+<?php 
+		$total=  $tsdeptcollection->count();
+		if($page > 1){
+			echo '<a href="?page=' . $prev . '">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+			if($page * $limit < $total) {
+				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+			}
+		} else {
+			if($page * $limit < $total) {
+				echo ' <a href="?page=' . $next . '">Next</a>&nbsp;&nbsp;&nbsp;&nbsp;';
+			}
+		}
+?>
+
+<?php 
+
    	} else if(isset($_POST['listshow'])) { 
    		foreach($deptlists as $deptlist){
 ?>

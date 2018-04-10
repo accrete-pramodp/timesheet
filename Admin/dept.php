@@ -62,7 +62,7 @@
     		//Cancel
     		$(document).on('click', '#cancel', function(){
     			$('#department')[0].reset();
-    			$('#addnew').removeClass('hide');
+    			//$('#addnew').removeClass('hide');
     			//$('#editnew').addClass('hide'); 
     		});
 
@@ -127,11 +127,13 @@
 
     	//Showing our Table
     	function showDept(){
+    		var page = location.search.split('page=')[1] ? location.search.split('page=')[1] : '1';
     		$.ajax({
     			url: 'show_dept.php',
     			type: 'POST',
     			async: false,
     			data:{
+    				page: page,
     				show: 1
     			},
     			success: function(response){
