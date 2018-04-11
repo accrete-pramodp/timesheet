@@ -13,11 +13,22 @@ $userscollection = $timesheetdb->tsusers;
 $userslists = $userscollection->find(["euname"=> $_POST['username'], "password"=> $_POST['password']]);
 
 $usersdata = array();
+$issuperadmin = '';
 foreach($userslists as $userslist) { 
 	$usersdata[] = $userslist;	
+	if(isset($userslist['issuperadmin'])){
+		$issuperadmin = 'yes';
+	} else {
+		$issuperadmin = 'no';
+	}
 }
 
-if(count($usersdata) > 0){
+if(count($usersdata) > 0 && $issuperadmin == 'yes') {
+	$_SESSION['username'] = $userslist['username'];
+	$_SESSION['password'] = $userslist['password'];
+	
+	header('location: Admin/index.php');
+} else if(count($usersdata) > 0 && !isset($usersdata['issuperadmin'])) {
 	$_SESSION['username'] = $userslist['username'];
 	$_SESSION['password'] = $userslist['password'];
 	

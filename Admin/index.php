@@ -49,7 +49,7 @@
 		    							<button type = "button" id="editnew" class = "btn btn-primary hide"><span class = "glyphicon glyphicon-pencil"></span> Edit</button>
 		    							<button type = "button" id="cancel" class = "btn btn-primary">Cancel</button>
 		    						</td>
-	    							<td colspan="2">&nbsp;</td>
+	    							<td colspan="2" style="float:right"><input type="text" value="" id="searchbox" placeholder="Search"> </td>
 	    						</tr>    						
     						</table>						
     					</form>
@@ -62,8 +62,8 @@
 		</div>
 	</div>
 </body>
-    <script src = "../jquery.js"></script>	
-    <script src = "../bootstrap.min.js"></script>
+    <script src = "../assets/js/jquery.js"></script>	
+    <script src = "../assets/js/bootstrap.min.js"></script>
     <script type = "text/javascript">
     	$(document).ready(function(){
         	showDept();

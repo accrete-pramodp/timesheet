@@ -2,7 +2,7 @@
 <html lang = "en">
 	<head>
 		<meta charset = "UTF-8" name = "viewport" content = "width-device=width, initial-scale=1" />
-		<link rel = "stylesheet" type = "text/css" href = "../css/bootstrap.min.css" />
+		<link rel = "stylesheet" type = "text/css" href = "../assets/css/bootstrap.min.css" />
 		<title>Employee's List</title>
     	</head>
     <body>
@@ -33,6 +33,15 @@
 									<li><a href="/timesheet/admin/index.php">List</a></li>
 								</ul>
 						</li>
+						
+						<li class="dropdown">                                    
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">                                            
+                                        <li>
+                                            <a href="../logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                                        </li>
+                                    </ul>
+                                </li>
                         
 					</ul>
 				</div><!-- /.navbar-collapse -->

@@ -1,41 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="">
-		<meta name="author" content="">
-		<link rel="icon" href="../../favicon.ico">
-		<title>Signin Template for Bootstrap</title>
-		<link href="css/bootstrap.min.css" rel="stylesheet">
-		<link href="css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-		<link href="css/signin.css" rel="stylesheet">
-	</head>
-<body>
-<div class="container">
 <?php 
-if(isset($_GET['e']) && $_GET['e'] == 'y') {
+include_once('header.php');
 ?>
-<div style="margin-left:400px;"><font color="red">Credentials not matched! Try again</font></div>
-<?php
-}
-?>
-<form name="Login_form" method="POST" action="login_submit.php" class="form-signin">
-<h2 class="form-signin-heading">Please sign in</h2>
-<label class="sr-only" for="Username">Username</label>
-<input id="username" name="username" class="form-control" placeholder="Username" value="" required="" autofocus="" type="text">
-<label class="sr-only" for="Password">Password</label>
-<input id="password" name="password" class="form-control" placeholder="Password" value="" required="" type="password">
-<div class="checkbox">
-<label>
-<input value="remember-me" type="checkbox">
-Remember me
-</label>
-</div>
-<input type="submit" name="submit" value="Sign in" class="btn btn-lg btn-primary btn-block">
-</form>
-</div>
-
+<div class="container-fluid body-content" style="padding-right: 50px; min-height:500px; overflow-y:scroll;">
+<body>
+	<div class="modal-login fade login in" id="loginModal" aria-hidden="false" style="display: block; position:absolute !important; margin-top: 0px; margin-bottom: 150px !important; margin-right: 15px;">
+		<div class="modal-dialog login animated">
+			<div class="modal-content" style="margin-bottom:180px !important;">
+				<div class="modal-body">
+					<div class="box">
+						<div class="content">
+							<div class="social" style="height:85px;">
+								<img src="assets/images/gns_logo.jpg" />
+							</div>
+							<div class="error">
+							<?php 
+							if(isset($_GET['e']) && $_GET['e'] == 'y') {
+							?>
+							<font color="red">Credentials not matched! Try again</font>
+							<?php
+							}
+							?>
+							</div>
+							<div class="form loginBox">
+								<form class = "form-horizontal" id="user_details" method="POST" action="login_submit.php">
+									<input type="text" name="username" id="username" class="form-control logincontrol" placeholder="Login Name" title="Login name is your 'FirstName+EmployeeCode' e.g. ABC1001 or Company EmailId">								
+								
+								<span style="color: red" class="logincontrol"><span class="field-validation-valid" data-valmsg-for="LoginName" data-valmsg-replace="true"></span></span>
+								
+									<br><input type="password" name="password" id="password" class="form-control logincontrol" placeholder="Password" title="GNS Portal Password (If you don't remember, click on forget password link below.">
+								<span style="color: red" class="logincontrol"><span class="field-validation-valid" data-valmsg-for="Password" data-valmsg-replace="true"></span></span>
+								<div class="clearfix" style="color: Red;margin-left:14px;"></div>
+									<input type="submit" value="Login" class="btn btn-default btn-login logincontrol"  style="margin-left:14px;">
+								</form>
+							</div>
+						</div>
+					</div>
+                    
+				</div>
+				<div class="modal-footer" style="padding-top: 1px; margin-bottom: 5px;">
+					<div class="forgot login-footer">
+						<span><a href="/Account/ForgotPassword">Forgot password ?</a></span>
+                    </div>                    
+				</div>
+			</div>
+		</div>
+	</div>
 </body>
-</html>
+</div> 
+<?php
+include_once('footer.php');
+?>
