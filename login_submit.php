@@ -23,13 +23,14 @@ foreach($userslists as $userslist) {
 	}
 }
 
-if(count($usersdata) > 0 && $issuperadmin == 'yes') {
-	$_SESSION['username'] = $userslist['username'];
+if(count($usersdata) > 0 && $issuperadmin == 'yes') { 
+	$_SESSION['username'] = $userslist['euname'];
 	$_SESSION['password'] = $userslist['password'];
+	$_SESSION['issuperadmin'] = $issuperadmin;
 	
 	header('location: Admin/index.php');
 } else if(count($usersdata) > 0 && !isset($usersdata['issuperadmin'])) {
-	$_SESSION['username'] = $userslist['username'];
+	$_SESSION['username'] = $userslist['euname'];
 	$_SESSION['password'] = $userslist['password'];
 	
 	

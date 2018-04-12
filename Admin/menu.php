@@ -1,3 +1,8 @@
+<?php 
+if($_SESSION['issuperadmin'] != 'yes'){
+	header('location: ../index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang = "en">
 	<head>
@@ -19,14 +24,7 @@
                 
                 <!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse" id="navbardiv">
-					<ul class="nav navbar-nav" style="padding-top:0%;float:right">
-						<li class="dropdown">
-							<a data-toggle="dropdown" class="dropdown-toggle">Department <span class="caret"></span></a>
-								<ul class="dropdown-menu">
-									<li><a href="/timesheet/admin/dept.php">List</a></li>
-								</ul>
-						</li>
-						
+					<ul class="nav navbar-nav" style="padding-top:0%;float:right">						
 						<li class="dropdown">
 							<a data-toggle="dropdown" class="dropdown-toggle">Employee <span class="caret"></span></a>
 								<ul class="dropdown-menu">
@@ -35,7 +33,7 @@
 						</li>
 						
 						<li class="dropdown">                                    
-                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i><?php echo $_SESSION['username']; ?> <b class="caret"></b></a>
                                     <ul class="dropdown-menu">                                            
                                         <li>
                                             <a href="../logout.php"><i class="fa fa-fw fa-power-off"></i> Log Out</a>

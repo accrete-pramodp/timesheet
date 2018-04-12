@@ -1,4 +1,8 @@
-<?php include_once('menu.php'); ?>
+<?php session_start();
+if($_SESSION['issuperadmin'] != 'yes'){
+	header('location: ../index.php');
+}
+include_once('menu.php'); ?>
 	
 	<div class = "row">	
 		<div class = "col-md-2"></div>
@@ -24,8 +28,8 @@
 		    						<td width="10%">&nbsp;</td>
 		    						<td width="20%"><label>Employee Department:</label><span style="color:red;">*</span></td>
 		    						<td width="25%">
-		    						<select id="edept" style="width:150px;">		    										    								
-		    							</select>
+		    						<input type="text" name="edept" id="edept" value="">
+		    						<!-- <select id="edept" style="width:150px;"></select> -->
 		    						</td>
 	    						</tr>
 	    						<tr><td colspan="5">&nbsp;</td></tr>
@@ -72,7 +76,8 @@
     		$(document).on('click', '#addnew', function() {
     			if (	$('#efname').val()=="" || 
     	    			$('#elname').val()=="" ||
-    	    			$('#euname').val()==""
+    	    			$('#euname').val()=="" ||
+    	    			$('#edept').val()==""    	    			
         	    	) {
     				alert('Please input proper data first');
     			}
@@ -133,7 +138,8 @@
     		$(document).on('click', '#editnew', function() {
     			if (	$('#efname').val()=="" || 
     	    			$('#elname').val()=="" ||
-    	    			$('#euname').val()==""
+    	    			$('#euname').val()=="" ||
+    	    			$('#edept').val()==""  
         	    	) {
     				alert('Please input proper data first');
     			}
@@ -181,7 +187,7 @@
     				$('#efname').val(obj.efname);
 					$('#elname').val(obj.elname);
 					$('#euname').val(obj.euname);
-					$("#edept").val(obj.edept).change();
+					$("#edept").val(obj.edept);
 					$('#eproject').val(obj.projects);
 					$("#ebillabletype").val(obj.ebillabletype).change();
     				
