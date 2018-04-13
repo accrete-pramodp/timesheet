@@ -32,7 +32,7 @@ if(count($usersdata) > 0 && $issuperadmin == 'yes') {
 } else if(count($usersdata) > 0 && !isset($usersdata['issuperadmin'])) {
 	$_SESSION['username'] = $userslist['euname'];
 	$_SESSION['password'] = $userslist['password'];
-	
+	$_SESSION['issuperadmin'] = 'no';
 	
 	header('location: welcome.php');
 } else {

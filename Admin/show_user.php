@@ -26,7 +26,9 @@ if(isset($_POST['show'])){
 		<th>Name</th><th>Department</th><th>Projects</th><th>Action</th>
 	</thead>
 	<tbody>
-	<?php foreach($userslists as $userslist) { ?>
+	<?php foreach($userslists as $userslist) { 
+	if($userslist['euname']!= 'admin') {
+	?>
 		<tr>
 			<td><?php echo $userslist['efname']. ' ' . $userslist['elname']; ?></td>
 			<td><?php echo $userslist['edept']; ?></td>
@@ -38,11 +40,12 @@ if(isset($_POST['show'])){
 			<?php //include('edit_modal.php'); ?>						
 			</td>
 		</tr>		
-	<?php } ?>
+	<?php }
+	} ?>
 	</tbody>
 	
 </table>
-<?php $total=  $tscollection->count();
+<?php $total=  ($tscollection->count()-1);
 		if($page > 1){
 			echo '<a href="?page=' . $prev . '">Previous</a>&nbsp;&nbsp;&nbsp;&nbsp;'. $page . ' of '. $total;
 			if($page * $limit < $total) {
